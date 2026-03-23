@@ -378,6 +378,27 @@
             justify-content: center;
             align-items: center;
             gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-card-yt::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('2025/galerie/signal-2025-09-18-19-56-55-040-5.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .gallery-card-yt > * {
+            position: relative;
+            z-index: 1;
         }
 
         .yt-icon {
@@ -618,14 +639,7 @@
 
                 <!-- Galerie -->
                 <a href="2026/galerie.html" class="gallery-card">
-                    <div class="gallery-card-link">
-                        <div class="gallery-icon">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 3H3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM3 19l4.5-6 3.5 4.5 2.5-3L17 19H3z"/>
-                            </svg>
-                        </div>
-                        <span class="gallery-label">Fotky &amp; slidy</span>
-                    </div>
+                    <img src="2025/galerie/signal-2025-09-18-19-56-55-040-3.jpg" alt="Galerie" class="gallery-card-img">
                     <div class="gallery-card-body">
                         <strong>Galerie</strong>
                         <p>Fotky a slidy z přednášek Orange Pillsen.</p>
