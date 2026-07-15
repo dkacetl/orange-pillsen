@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SHA-256 bitová statistika + PoW</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="hash-stats.css" />
+  </head>
+
+  <body>
+    <h2>SHA-256 – bitová statistika (PoW + pravděpodobnost)</h2>
+    <div class="row">
+      <div class="panel" id="inputForm">
+        <div>
+          <label>Počet hashů:</label>
+          <input id="count" type="number" value="10" min="1" />
+        </div>
+        <br />
+        <div>
+          <label>Obtížnost (binární nuly 0–256):</label>
+          <input id="difficulty" type="number" value="0" min="0" max="256" />
+        </div>
+        <div>
+          <label>Počet paralelních bloků:</label>
+          <input id="pregenerateValidCount" type="number" value="0" min="1" />
+        </div>
+
+        <button onclick="run()">Spustit</button>
+
+        <br />
+        <br />
+        <br />
+
+        <div>
+          <label>Počet experimentů:</label>
+          <input id="experimentCount" type="number" value="3" min="1" />
+        </div>
+
+        <button onclick="runExperiments()">Spustit experimenty</button>
+      </div>
+
+      <div class="panel" id="stats-panel">
+        <table id="stats" class="stats">
+          <tr>
+            <td><b>Validní hashy:</b></td>
+            <td><span id="foundCount"></span></td>
+          </tr>
+          <tr>
+            <td><b>Doba výpočtu:</b></td>
+            <td><span id="elapsedTime"></span> s</td>
+          </tr>
+          <tr>
+            <td><b>Úspěšnost:</b></td>
+            <td><span id="successRate"></span> %</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="panel" id="probBox-panel">
+        <table id="probBox" class="stats">
+          <tr>
+            <td><b>Vzorec:</b></td>
+            <td>P = 1 / 2^<span id="probDifficulty"></span></td>
+          </tr>
+          <tr>
+            <td><b>Výpočet:</b></td>
+            <td>
+              2^<span id="probDifficultyPow"></span> =
+              <span id="probPowResult"></span>
+            </td>
+          </tr>
+          <tr>
+            <td><b>Pravděpodobnost:</b></td>
+            <td><span id="probResult"></span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" id="pregenerateValidHashList-panel">
+      <h2>Předgenerované validní hashe (binárně)</h2>
+      <div id="pregenerateValidHashList" class="hash-list"></div>
+    </div>
+
+    <div class="panel" id="hashList-panel">
+      <h2>Vygenerované hashe (binárně)</h2>
+      <div id="hashList" class="hash-list"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Bitový histogram validních hashů</h2>
+      <canvas id="chart" height="120" style="display: none"></canvas>
+    </div>
+
+    <div class="panel" id="allExperimentsStats-panel">
+      <h2>Souhrnné statistiky ze všech experimentů</h2>
+      <table id="allExperimentsStats" class="stats">
+        <tr>
+          <td><b>Počet experimentů:</b></td>
+          <td><span id="totalExperiments"></span></td>
+        </tr>
+        <tr>
+          <td><b>Celkem validních hashů:</b></td>
+          <td><span id="totalFoundCount"></span></td>
+        </tr>
+        <tr>
+          <td><b>Celková doba výpočtu:</b></td>
+          <td><span id="totalElapsedTime"></span> s</td>
+        </tr>
+        <tr>
+          <td><b>Průměrná úspěšnost:</b></td>
+          <td><span id="averageSuccessRate"></span> %</td>
+        </tr>
+      </table>
+    </div>
+
+    <script src="hash-stats.js"></script>
+  </body>
+</html>
