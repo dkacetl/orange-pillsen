@@ -1,5 +1,7 @@
 const BIT_COUNT = 256;
+const MAX_HASH_VALUE = Number((1n << 256n) - 1n);
 let chart = null;
+let chartOrder = null;
 let smallestPregeneratedHashValue = null;
 
 function updateProbability() {
@@ -76,7 +78,7 @@ async function run() {
       (smallestPregeneratedHashValue === null ||
         hashValue < smallestPregeneratedHashValue);
 
-    if (i < 50) {
+    if (i < 500) {
       firstHashes.push({
         hashBytes,
         className: isValid ? 'hash-valid' : 'hash-invalid',
@@ -113,6 +115,7 @@ async function run() {
 
   drawChart(bitCounts);
   renderHashList(firstHashes);
+  drawOrderChart(firstHashes);
 }
 
 function hashBytesToBinary(hashBytes) {
@@ -253,6 +256,76 @@ function drawChart(values) {
           },
           ticks: {
             maxTicksLimit: 16,
+          },
+        },
+      },
+    },
+  });
+}
+
+function hashBytesToValue(hashBytes) {
+  return BigInt(
+    '0x' +
+      Array.from(hashBytes)
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join(''),
+  );
+}
+
+function drawOrderChart(hashList) {
+  const canvas = document.getElementById('chartOrder');
+
+  if (hashList.length === 0) {
+    if (chartOrder) chartOrder.destroy();
+    chartOrder = null;
+    canvas.style.display = 'none';
+    return;
+  }
+
+  canvas.style.display = 'block';
+
+  const sorted = hashList
+    .map(({ hashBytes, className }) => ({
+      className,
+      normalizedValue: Number(hashBytesToValue(hashBytes)) / MAX_HASH_VALUE,
+    }))
+    .sort((a, b) => a.normalizedValue - b.normalizedValue);
+
+  const labels = sorted.map((_, i) => (i + 1).toString());
+  const values = sorted.map((item) => item.normalizedValue);
+  const colors = sorted.map((item) =>
+    item.className === 'hash-valid' ? '#0b3d0b' : '#d9534f',
+  );
+
+  if (chartOrder) chartOrder.destroy();
+
+  chartOrder = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Seřazené a normalizované hashe (0-1)',
+          data: values,
+          backgroundColor: colors,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          min: 0,
+          max: 1,
+          title: {
+            display: true,
+            text: 'Normalizovaná hodnota hashe (0-1)',
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Pořadí po seřazení',
           },
         },
       },
