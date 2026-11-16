@@ -179,3 +179,28 @@ P = 1 − Σ_{k=0}^{z} (λ^k e^(−λ) / k!) · (1 − (q/p)^(z−k))
 ```
 
 Část pro k > z se do něj „schovala" ve výrazu „1 −". Dá se spočítat cyklem od 0 do z.
+
+## 8. Proč je pro z = 0 vždy P = 1, i pro q = 0,1?
+
+> proč v bitcoin whitepapper na konci kapitoly 11 je pro Z=0 vždy pravděpodobnost P=1 i pro q=0.1? To znamená, že když útočník má q=0.1, že stále má 100% pravděpodobnost při z=0?
+
+Výsledek je správně. Neznamená ale, že útočník s 10 % výkonu vyhraje proti obchodníkovi, který na něco čekal. z = 0 znamená, že obchodník nečekal na žádné potvrzení, takže útočník nemá co dohánět.
+
+Dosazení z = 0:
+
+- λ = z · q/p = 0
+- Poisson s λ = 0 dává k = 0 s pravděpodobností 1 (`0^0 · e^0 / 0! = 1`), ostatní k mají pravděpodobnost 0.
+- Pro k = 0 je člen (q/p)^(z−k) = (q/p)^0 = 1.
+- Konečný tvar: `P = 1 − 1 · (1 − (q/p)^0) = 1 − 0 = 1`.
+
+Na q výsledek nezávisí, protože q se do vzorce dostane jen přes λ a exponent z − k, a oba jsou nulové.
+
+Proč to dává smysl:
+
+1. **z je náskok poctivého řetězce.** Při z = 0 žádný náskok nemá. Obchodník vydal zboží dřív, než byla transakce v bloku.
+2. **Úspěch v modelu je „dohnání“, tedy mezera 0.** Gambler's ruin (q/p)^n je pravděpodobnost, že se mezera n někdy dostane na nulu. Pro n = 0 je na nule hned na začátku, takže je to 1.
+3. **Prakticky:** při nule potvrzení útočník skoro nepotřebuje výpočetní výkon. Stačí poslat do sítě konfliktní transakci (double spend). Proto se 0-conf nepovažuje za bezpečné.
+
+Zjednodušení: Satoshi počítá jako úspěch útočníka už vyrovnání (remízu). Ve skutečnosti musí útočníkův řetězec poctivý předběhnout. Pro z = 0 je proto P = 1 horní mez. Skutečná šance je menší, ale pořád nepřijatelně vysoká. Hlavní poselství: bez potvrzení obchodník nemá žádnou matematickou ochranu.
+
+Srovnání pro q = 0,1: z = 0 → P = 1; z = 1 → P ≈ 0,2046; z = 5 → P ≈ 0,0009137.
