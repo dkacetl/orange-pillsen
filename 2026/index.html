@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange Pillsen 2026</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --accent-orange: #FF7F00;
+            --accent-glow: rgba(255, 127, 0, 0.4);
+            --accent-gold: #D4AF37;
+            --text-light: #f5f5f5;
+            --text-muted: #aaaaaa;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Jemný animovaný background */
+            background: radial-gradient(circle at 15% 50%, rgba(255, 127, 0, 0.08), transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.05), transparent 50%),
+                var(--bg-dark);
+            background-size: 200% 200%;
+            animation: bg-shift 15s ease infinite alternate;
+        }
+
+        @keyframes bg-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Kontejner s plynulým nástupem */
+        .poster-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 40px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            overflow: hidden;
+            animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+            min-width: 380px;
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- HLAVIČKA --- */
+        .top-bar {
+            background: linear-gradient(90deg, rgba(255, 127, 0, 0.1) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 127, 0, 0.1) 100%);
+            border-bottom: 1px solid var(--glass-border);
+            text-align: center;
+            padding: 12px 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #ccc;
+        }
+
+        .top-bar strong {
+            color: var(--accent-orange);
+        }
+
+        /* --- HERO SECTIONS --- */
+        .hero-section {
+            padding: 50px 40px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .hero-logo {
+            flex: 0 0 40%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-logo video {
+            width: 100%;
+            max-width: 260px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            /* Kruhové video působí luxusněji */
+            border: 3px solid var(--accent-orange);
+            object-fit: cover;
+            box-shadow: 0 0 30px var(--accent-glow), inset 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 127, 0, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 0 40px rgba(255, 127, 0, 0.6);
+            }
+        }
+
+        .hero-text {
+            flex: 0 0 60%;
+            padding-left: 40px;
+        }
+
+        .hero-text h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #FF7F00, #ffb347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 5px 15px rgba(255, 127, 0, 0.2);
+            margin-bottom: -10px;
+        }
+
+        .hero-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 6rem;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--accent-gold);
+            line-height: 1;
+            opacity: 0.8;
+        }
+
+        /* --- OBSAH --- */
+        .content-section {
+            display: flex;
+            padding: 0;
+        }
+
+        /* --- LEVÝ SLOUPEC --- */
+        .sidebar {
+            flex: 0 0 33%;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.2);
+            border-right: 1px solid var(--glass-border);
+        }
+
+        .info-block {
+            margin-bottom: 40px;
+        }
+
+        .info-block h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: inline-block;
+            border-bottom: 1px solid var(--accent-orange);
+            padding-bottom: 5px;
+        }
+
+        .info-block p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #ddd;
+        }
+
+        .info-block strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* --- PRAVÝ SLOUPEC --- */
+        .main-content {
+            flex: 0 0 67%;
+            padding: 40px;
+        }
+
+        .session {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        .session:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 127, 0, 0.1);
+        }
+
+        .session-text-content {
+            flex: 1;
+        }
+
+        .session-text-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .session-text-content p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .speaker-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+
+        .speaker-portrait {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-orange);
+            margin-right: 15px;
+        }
+
+        .speaker-text {
+            font-size: 0.85rem;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .speaker-text strong {
+            font-style: normal;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* --- GALERIE --- */
+        .gallery-section {
+            border-top: 1px solid var(--glass-border);
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            display: inline-block;
+            border-bottom: 1px solid var(--accent-orange);
+            padding-bottom: 5px;
+        }
+
+        .gallery-grid {
+            display: flex;
+            gap: 25px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .gallery-card {
+            flex: 1;
+            min-width: 220px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 127, 0, 0.15);
+        }
+
+        .gallery-card-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+        }
+
+        .gallery-card-link {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #0a1a00 0%, #1a3300 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .gallery-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--accent-orange);
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 20px var(--accent-glow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-card:hover .gallery-icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(255, 127, 0, 0.6);
+        }
+
+        .gallery-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff;
+        }
+
+        .gallery-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: #ccc;
+            letter-spacing: 1px;
+        }
+
+        .gallery-card-yt {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #1a0000 0%, #3a0000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-card-yt::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../2025/galerie/signal-2025-09-18-19-56-55-040-5.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .gallery-card-yt > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .yt-icon {
+            width: 64px;
+            height: 64px;
+            background: #FF0000;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-card:hover .yt-icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(255, 0, 0, 0.7);
+        }
+
+        .yt-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff;
+        }
+
+        .yt-handle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: #ccc;
+            letter-spacing: 1px;
+        }
+
+        .gallery-card-body {
+            padding: 16px 20px;
+            flex: 1;
+        }
+
+        .gallery-card-body p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .gallery-card-body strong {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: #fff;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* --- PATIČKA --- */
+        .footer {
+            background: rgba(0, 0, 0, 0.4);
+            border-top: 1px solid var(--glass-border);
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .sponsor-logo {
+            height: 30px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .sponsor-logo:hover {
+            opacity: 1;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+        }
+
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column;
+            }
+
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-logo {
+                margin-bottom: 30px;
+            }
+
+            .hero-text {
+                padding-left: 0;
+            }
+
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-text h2 {
+                font-size: 4.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="poster-container">
+
+        <div class="top-bar">
+            PLZEŇSKÁ <a href="https://jednadvacet.org/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;"><strong>JEDNADVACET.ORG</strong></a> VÁS ZVE NA MINIKONFERENCI O BITCOINU
+        </div>
+
+        <div class="hero-section">
+            <div class="hero-logo">
+                <video autoplay loop muted playsinline>
+                    <source src="Orange_pillsen_loop.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="hero-text">
+                <h1>ORANGE<br>PILLSEN</h1>
+                <h2>2026</h2>
+            </div>
+        </div>
+
+        <!-- NOVINKY -->
+        <div class="gallery-section" style="background: rgba(255, 127, 0, 0.04); border-top: 1px solid rgba(255, 127, 0, 0.2); border-bottom: 1px solid rgba(255, 127, 0, 0.2);">
+            <h3>Novinky</h3>
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); border-left: 3px solid var(--accent-orange); border-radius: 12px; padding: 25px 30px; margin-bottom: 20px;">
+                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 10px;">13. května 2026</p>
+                <p style="font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 12px;">Záznamy přednášek jsou online!</p>
+                <p style="font-size: 0.92rem; line-height: 1.8; color: #ccc;">
+                    Máme skvělou zprávu! Záznamy všech přednášek z letošní konference jsou nyní k dispozici na našem <a href="https://www.youtube.com/@OrangePillsen" target="_blank" rel="noopener" style="color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid rgba(255,127,0,0.4);">YouTube kanálu</a>.
+                    Pokud jste se nemohli zúčastnit osobně nebo si chcete některé momenty připomenout, přejeme příjemnou podívanou.
+                </p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); border-left: 3px solid var(--accent-orange); border-radius: 12px; padding: 25px 30px;">
+                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 10px;">23. dubna 2026</p>
+                <p style="font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 12px;">Konference úspěšně proběhla &mdash; děkujeme!</p>
+                <p style="font-size: 0.92rem; line-height: 1.8; color: #ccc;">
+                    Orange Pillsen 2026 je za námi. Děkujeme všem návštěvníkům, přednášejícím i sponzorovi za skvělou atmosféru a zájem o bitcoinová témata.
+                    Záznamy přednášek momentálně připravujeme &mdash; záznamy budou k dispozici na našem <a href="https://www.youtube.com/@OrangePillsen" target="_blank" rel="noopener" style="color: var(--accent-orange); text-decoration: none; border-bottom: 1px solid rgba(255,127,0,0.4);">YouTube kanálu</a>
+                    a o jejich dostupnosti budeme informovat v samostatném příspěvku na webu.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="sidebar">
+                <div class="info-block">
+                    <h3>KDE</h3>
+                    <p><strong>TechTower</strong></p>
+                    <p>místnost Z6, "Josef Průša"</p>
+                    <p>Koterovská 152,</p>
+                    <p>Plzeň 2-Slovany</p>
+                    <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">🅿️ <strong style="color: #ddd;">Parkování:</strong> přímo v areálu TechTower je vyhrazené parkoviště.</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>KDY</h3>
+                    <p><strong>Čtvrtek, 23.4.2026</strong></p>
+                    <p>Začátek: <strong>17:00</strong></p>
+                    <p>Vstup: <strong>Volný</strong></p>
+                </div>
+
+                <div class="info-block" style="margin-top: 60px;">
+                    <h3>SPONZOR</h3>
+                    <a href="https://www.galosoft.cz/cs/crypto" target="_blank" rel="noopener" style="text-decoration: none;">
+                        <p style="color: #fff; font-weight: 600; margin-bottom: 5px;">GaloSoft CRYPTO s.r.o.</p>
+                    </a>
+                    <p style="font-size: 0.8rem; line-height: 1.5;">Profesionální poradenství v oblasti kryptoměn a
+                        těžby.</p>
+                </div>
+            </div>
+
+            <div class="main-content">
+
+                <div class="session" style="animation: fade-in-up 1s 0.2s both;">
+                    <div class="session-text-content">
+                        <h3>KASPA VS. BITCOIN</h3>
+                        <p>Proč je Bitcoin králem bezpečnosti a jaké technologické kompromisy přináší Kaspa ve své snaze
+                            o radikálně vyšší rychlost sítě?</p>
+                        <div class="speaker-info">
+                            <img src="david_kacetl.jpg" alt="David Kacetl" class="speaker-portrait">
+                            <div class="speaker-text">Přednášející: <strong>David Kacetl</strong>, programátor</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session" style="animation: fade-in-up 1s 0.4s both;">
+                    <div class="session-text-content">
+                        <h3>RAKOUSKÁ EKONOMICKÁ ŠKOLA A MINING</h3>
+                        <p>Těžba Bitcoinu optikou zdravých peněz a svobodného trhu. Jak mining motivuje k efektivnímu
+                            nakládání s energií a posiluje síť.</p>
+                        <div class="speaker-info">
+                            <img src="franta_kohout_linked_in.jpg" alt="František Kohout" class="speaker-portrait">
+                            <div class="speaker-text">Přednášející: <strong>František Kohout</strong>, blázen do miningu
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session" style="animation: fade-in-up 1s 0.6s both;">
+                    <div class="session-text-content">
+                        <h3>KRYPTOANARCHISMUS</h3>
+                        <p>Pohled do historie hnutí cypherpunks. Jak myšlenky svobody a důraz na soukromí formovaly
+                            vznik Bitcoinu a proč jsou stále tak důležité.</p>
+                        <div class="speaker-info">
+                            <img src="luk_cogito.jpg" alt="Luk Cogito" class="speaker-portrait">
+                            <div class="speaker-text">Přednášející: <strong>Luk Cogito</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session" style="animation: fade-in-up 1s 0.8s both;">
+                    <div class="session-text-content">
+                        <h3>SEEDSIGNER: VLASTNÍ PENĚŽENKA</h3>
+                        <p>Jak si z dostupných součástek postavit plně funkční a bezpečnou hardwarovou peněženku. Čistě
+                            open-source a "Udělej si sám" přístup.</p>
+                        <div class="speaker-info">
+                            <img src="Martin_blass.jpg" alt="Martin Blass" class="speaker-portrait">
+                            <div class="speaker-text">Přednášející: <strong>Martin Blass</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SLEDUJTE NÁS -->
+        <div class="gallery-section">
+            <h3>Zdroje</h3>
+            <div class="gallery-grid">
+
+                <!-- YouTube kanál -->
+                <a href="https://www.youtube.com/@OrangePillsen" class="gallery-card">
+                    <div class="gallery-card-yt">
+                        <div class="yt-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z" />
+                            </svg>
+                        </div>
+                        <span class="yt-handle">@OrangePillsen</span>
+                    </div>
+                    <div class="gallery-card-body">
+                        <strong>YouTube kanál</strong>
+                        <p>Záznamy přednášek a sestřihy z akcí Orange Pillsen.</p>
+                    </div>
+                </a>
+
+                <!-- Galerie -->
+                <a href="galerie.html" class="gallery-card">
+                    <img src="galerie/DSCF2222.jpg" alt="Galerie" class="gallery-card-img">
+                    <div class="gallery-card-body">
+                        <strong>Galerie</strong>
+                        <p>Fotky a slidy z přednášek Orange Pillsen 2026.</p>
+                    </div>
+                </a>
+
+
+            </div>
+        </div>
+
+        <!-- PŘEDCHOZÍ ROČNÍKY -->
+        <div class="gallery-section">
+            <h3>Předchozí ročníky</h3>
+            <div class="gallery-grid">
+
+                <!-- Předchozí ročník -->
+                <a href="../2025/OrangePilsen2025.html" target="_blank" rel="noopener" class="gallery-card">
+                    <img src="orange_pillsen_2025.png" alt="Orange Pillsen 2025" class="gallery-card-img">
+                    <div class="gallery-card-body">
+                        <strong>Orange Pillsen 2025</strong>
+                        <p>Ohlédnutí za předchozím ročníkem minikonference o Bitcoinu.</p>
+                    </div>
+                </a>
+
+                <!-- Galerie -->
+                <a href="../2025/galerie.html" class="gallery-card">
+                    <img src="../2025/galerie/signal-2025-09-18-19-56-55-040-3.jpg" alt="Galerie" class="gallery-card-img">
+                    <div class="gallery-card-body">
+                        <strong>Galerie</strong>
+                        <p>Fotky a slidy z přednášek Orange Pillsen 2025.</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <a href="https://jednadvacet.org/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+                <div class="footer-logo-text">
+                    JEDNA<br>DVACET <span style="color:var(--accent-orange); font-size:1rem;">₿</span>
+                </div>
+            </a>
+            <a href="https://www.galosoft.cz/cs/crypto" target="_blank" rel="noopener">
+                <img src="galosoft_logo.svg" alt="GaloSoft Logo" class="sponsor-logo" />
+            </a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

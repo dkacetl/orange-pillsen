@@ -204,3 +204,41 @@ Proč to dává smysl:
 Zjednodušení: Satoshi počítá jako úspěch útočníka už vyrovnání (remízu). Ve skutečnosti musí útočníkův řetězec poctivý předběhnout. Pro z = 0 je proto P = 1 horní mez. Skutečná šance je menší, ale pořád nepřijatelně vysoká. Hlavní poselství: bez potvrzení obchodník nemá žádnou matematickou ochranu.
 
 Srovnání pro q = 0,1: z = 0 → P = 1; z = 1 → P ≈ 0,2046; z = 5 → P ≈ 0,0009137.
+
+## 9. Proč při p > q útočník ztrátu vždy dožene? (Nedožene.)
+
+> Jak je možné, že při problému zruinování hráče, pokud poctivý řetězec má větší p než q, neexistuje nikdy šance, že by se utočníkovi nepovedlo dohnat ztrátu
+
+Tady se prohodily dvě větve gambler's ruin. Při poctivé většině (p > q) útočník naopak **často nedožene**. Jistotu dohnání (pravděpodobnost 1) má jen při q ≥ p.
+
+| Situace | Útočník dožene ztrátu z bloků | Útočník nedožene |
+|---|---|---|
+| **p > q** (poctivá většina) | (q/p)^z < 1 | 1 − (q/p)^z > 0 |
+| **q ≥ p** (útočník má většinu nebo polovinu) | 1 | 0 |
+
+Příklad pro q = 0,1: při ztrátě 1 bloku útočník dožene s pravděpodobností 0,111, tedy v 89 % případů nedožene. Při ztrátě 5 bloků dožene s pravděpodobností 0,111^5 ≈ 0,0000169.
+
+### Proč při p > q útočník většinou prohraje
+
+Mezera se s každým blokem zvětší o 1 s pravděpodobností p a zmenší o 1 s pravděpodobností q. V průměru tedy roste o p − q na blok, při q = 0,1 o 0,8 bloku. Čím déle závod trvá, tím je útočník dál. Šanci má jen na začátku, když bude mít šťastnou sérii, než mezera uteče.
+
+Dohnání proto není nikdy jisté, ale ani nemožné, protože (q/p)^z > 0. Šance jen exponenciálně klesá s rostoucím z.
+
+### Proč při q ≥ p dožene vždy
+
+- **q > p:** mezera se v průměru zmenšuje. Závod nemá časový limit, takže útočník mezeru nakonec dorovná.
+- **q = p:** mezera se v průměru nemění. Symetrická náhodná procházka ale s pravděpodobností 1 dřív nebo později navštíví každou hodnotu, tedy i nulu. Očekávaná doba do dohnání je ovšem nekonečná.
+
+### Odvození
+
+Označme a_n pravděpodobnost, že útočník někdy dožene ztrátu n bloků. Po jednom bloku je ztráta buď n − 1 (s pravděpodobností q), nebo n + 1 (s pravděpodobností p):
+
+```
+a_n = q · a_{n−1} + p · a_{n+1},    a_0 = 1
+```
+
+Pro p ≠ q má rovnice obecné řešení a_n = A + B · (q/p)^n.
+
+- **p > q:** z velké ztráty se útočník skoro nikdy nevrátí, takže a_n → 0 pro n → ∞. To vyžaduje A = 0, proto **a_n = (q/p)^n**.
+- **q > p:** (q/p)^n roste nad všechny meze, ale pravděpodobnost nesmí být větší než 1. To vyžaduje B = 0, proto **a_n = 1**.
+- **q = p:** obecné řešení je a_n = A + B · n. Pravděpodobnost musí zůstat v intervalu [0, 1], takže B = 0 a **a_n = 1**.
