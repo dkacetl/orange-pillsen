@@ -126,6 +126,10 @@
 
         .btn--sm { padding: 0.55rem 1rem; font-size: 0.7rem; }
 
+        .btn--youtube { gap: 0.75rem; padding: 1.2rem 2rem; font-size: 1rem; }
+        .btn--youtube svg { width: 2rem; height: 2rem; }
+        .btn--youtube:hover svg { transform: none; }
+
         .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
         /* --- horní lišta + hlavička --- */
@@ -461,7 +465,6 @@
         .tile:hover .tile-visual img { filter: none; transform: scale(1.04); }
         .tile-visual--banner { background: #1b1a17; }
         .tile-visual--banner img { object-fit: contain; filter: none; }
-        .tile-visual--centered img { object-position: center center; }
         .tile-visual--archive-2025 { background: #030201; }
         .tile-visual--archive-2025 img { width: 70%; height: 70%; }
 
@@ -710,7 +713,7 @@
                     <p class="mono">Programátor a bitcoinový nadšenec</p>
                 </div>
                 <div class="tile">
-                    <div class="tile-visual tile-visual--centered"><img src="2027/michal_sykora.jpg" alt="Michal Sýkora" loading="lazy"></div>
+                    <div class="tile-visual"><img src="2027/michal_sykora.jpg" alt="Michal Sýkora" loading="lazy"></div>
                     <h3 class="display">Michal Sýkora</h3>
                     <p class="mono">Lídr plzeňské jednadvacítky</p>
                 </div>
@@ -742,8 +745,9 @@
                     <p class="eyebrow">Archiv</p>
                     <h2 class="display">Předchozí ročníky</h2>
                 </div>
-                <a href="https://www.youtube.com/@OrangePillsen" target="_blank" rel="noopener" class="btn btn--frame">YouTube @OrangePillsen
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <a href="https://www.youtube.com/@OrangePillsen" target="_blank" rel="noopener" class="btn btn--frame btn--youtube">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    YouTube @OrangePillsen
                 </a>
             </div>
 
