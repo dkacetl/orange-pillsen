@@ -27,15 +27,12 @@
             --muted-fg: oklch(0.72 0.03 75);
             --primary: #fe7802; /* = oklch(0.72 0.19 50) oříznuté do sRGB, aby vyšlo stejně i na P3 displejích */
             --primary-fg: oklch(0.14 0.012 55);
-            --primary-glow: #fea92f; /* = oklch(0.8 0.16 70) v sRGB */
             --border: oklch(0.95 0.025 85 / 13%);
 
             --font-display: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
             --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
             --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-            --gradient-orange: linear-gradient(120deg, var(--primary), var(--primary-glow));
-            --shadow-glow: 0 20px 60px -20px color-mix(in oklab, var(--primary) 60%, transparent);
             --container: 80rem;
             --gutter: 1.25rem;
 
@@ -53,7 +50,7 @@
         body {
             background: var(--stout);
             color: var(--foam);
-            font-family: var(--font-sans);
+            font-family: var(--font-sans), sans-serif;
             font-size: 1rem;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
@@ -73,7 +70,7 @@
 
         /* --- typografie --- */
         .display {
-            font-family: var(--font-display);
+            font-family: var(--font-display), sans-serif;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: -0.01em;
@@ -81,7 +78,7 @@
         }
 
         .eyebrow, .mono {
-            font-family: var(--font-mono);
+            font-family: var(--font-mono), monospace;
             font-size: 0.75rem;
             letter-spacing: 0.18em;
             text-transform: uppercase;
@@ -90,15 +87,7 @@
         .eyebrow { color: var(--primary); }
         .mono { color: var(--muted-fg); }
 
-        .text-gradient {
-            background-image: var(--gradient-orange);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
         .text-primary { color: var(--primary); }
-        .lead { font-size: 1.125rem; color: var(--muted-fg); }
 
         h2.display { font-size: clamp(3rem, 7vw, 4.5rem); margin-top: 1.25rem; }
 
@@ -107,7 +96,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: var(--font-mono);
+            font-family: var(--font-mono), monospace;
             font-size: 0.8rem;
             font-weight: 500;
             letter-spacing: 0.14em;
@@ -121,9 +110,8 @@
         .btn:hover svg { transform: translateX(3px); }
 
         .btn--hero {
-            background-image: var(--gradient-orange);
+            background-color: var(--primary);
             color: var(--primary-fg);
-            box-shadow: var(--shadow-glow);
         }
 
         .btn--hero:hover { transform: translateY(-2px); }
@@ -145,7 +133,7 @@
             border-bottom: 1px solid var(--border);
             padding-block: 0.5rem;
             text-align: center;
-            font-family: var(--font-mono);
+            font-family: var(--font-mono), monospace;
             font-size: 0.68rem;
             letter-spacing: 0.16em;
             text-transform: uppercase;
@@ -181,9 +169,9 @@
             width: 2rem;
             height: 2rem;
             border-radius: 50%;
-            background-image: var(--gradient-orange);
+            background-color: var(--primary);
             color: var(--primary-fg);
-            font-family: var(--font-display);
+            font-family: var(--font-display), sans-serif;
             font-weight: 900;
             font-size: 1.125rem;
         }
@@ -193,7 +181,7 @@
         .site-nav { display: flex; align-items: center; gap: 2rem; }
 
         .site-nav a:not(.btn) {
-            font-family: var(--font-mono);
+            font-family: var(--font-mono), monospace;
             font-size: 0.75rem;
             letter-spacing: 0.16em;
             text-transform: uppercase;
@@ -255,7 +243,7 @@
             .site-nav a:not(.btn) {
                 padding-block: 0.9rem;
                 border-bottom: 1px solid var(--border);
-                font-family: var(--font-display);
+                font-family: var(--font-display), sans-serif;
                 font-weight: 900;
                 font-size: 2.25rem;
                 line-height: 1;
@@ -273,7 +261,6 @@
             isolation: isolate;
             overflow: hidden;
             min-height: calc(100vh - 6rem);
-            min-height: calc(100svh - 6rem);
         }
 
         .hero-img {
@@ -325,10 +312,7 @@
             font-size: 0.5em;
             /*line-height: 0.8;*/
             margin-top: 0.08em;
-            background-image: var(--gradient-orange);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--primary);
             letter-spacing: 0.02em;
             animation: year-fill 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) 0.9s both;
         }
@@ -341,7 +325,7 @@
             right: 0.04em;
             bottom: -0.14em;
             height: 0.06em;
-            background-image: var(--gradient-orange);
+            background-color: var(--primary);
             transform-origin: left;
             animation: year-line 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 1.2s both;
         }
@@ -429,7 +413,8 @@
         }
 
         /* --- sekce --- */
-        .section { padding-block: 6rem; }
+        .section { padding-block: 3rem 3rem; }
+        .section--flush { padding-top: 0; }
 
         .section-head {
             display: flex;
@@ -437,40 +422,6 @@
             align-items: flex-end;
             justify-content: space-between;
             gap: 1.5rem;
-        }
-
-        /* --- pilíře --- */
-        .pillars-wrap {
-            border-block: 1px solid var(--border);
-            background: var(--card);
-        }
-
-        .pillars {
-            max-width: var(--container);
-            margin-inline: auto;
-            display: grid;
-        }
-
-        .pillar {
-            padding: 2rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .pillar svg {
-            width: 1.75rem;
-            height: 1.75rem;
-            color: var(--primary);
-            transition: transform 0.3s ease;
-        }
-
-        .pillar:hover svg { transform: translateY(-4px); }
-        .pillar h3 { margin-top: 1.5rem; font-size: 1.875rem; }
-        .pillar p { margin-top: 0.75rem; font-size: 0.875rem; color: var(--muted-fg); }
-
-        @media (min-width: 768px) {
-            .pillars { grid-template-columns: repeat(4, 1fr); }
-            .pillar { border-bottom: none; border-right: 1px solid var(--border); }
-            .pillar:last-child { border-right: none; }
         }
 
         /* --- mřížka karet (program, archiv) --- */
@@ -510,35 +461,13 @@
         .tile:hover .tile-visual img { filter: none; transform: scale(1.04); }
         .tile-visual--banner { background: #1b1a17; }
         .tile-visual--banner img { object-fit: contain; filter: none; }
-        .tile:hover .tile-visual--mark { background-image: var(--gradient-orange); color: var(--primary-fg); }
+        .tile-visual--centered img { object-position: center center; }
+        .tile-visual--archive-2025 { background: #030201; }
+        .tile-visual--archive-2025 img { width: 70%; height: 70%; }
 
         .tile h3 { margin-top: 1.25rem; font-size: 1.5rem; }
         .tile .mono { font-size: 0.7rem; letter-spacing: 0.14em; }
         .tile p:not(.mono) { margin-top: 0.75rem; font-size: 0.875rem; color: var(--muted-fg); }
-        .tile .quote { color: var(--primary); }
-
-        /* --- novinky --- */
-        .news {
-            margin-top: 3rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .news article {
-            display: grid;
-            gap: 0.75rem;
-            padding-block: 2rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .news h3 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
-        .news p { max-width: 42rem; color: var(--muted-fg); }
-        .news p a { color: var(--primary); border-bottom: 1px solid color-mix(in oklab, var(--primary) 40%, transparent); }
-
-        @media (min-width: 768px) {
-            .news article { grid-template-columns: 14rem 1fr; column-gap: 2rem; }
-            .news time { padding-top: 0.6rem; }
-            .news article > div { display: grid; gap: 0.75rem; }
-        }
 
         /* --- kdy / kde / sponzor --- */
         .info {
@@ -555,7 +484,7 @@
         .info dd strong {
             display: block;
             margin-bottom: 0.5rem;
-            font-family: var(--font-display);
+            font-family: var(--font-display), sans-serif;
             font-weight: 900;
             text-transform: uppercase;
             font-size: clamp(2rem, 3.5vw, 2.75rem);
@@ -667,7 +596,6 @@
                 <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
             </button>
             <nav class="site-nav" id="site-nav" aria-label="Hlavní navigace">
-                <a href="#novinky">Novinky</a>
                 <a href="#program">Program</a>
                 <a href="#misto">Místo a čas</a>
                 <a href="#archiv">Archiv</a>
@@ -683,7 +611,7 @@
             <p class="eyebrow rise"><time datetime="2027-02-06">Sobota 6. 2. 2027</time> · Plzeň</p>
             <h1 class="display rise rise-2" aria-label="Orange Pillsen 2027">
                 <span class="h1-line">Orange <span class="h1-year" aria-hidden="true">2027</span></span>
-                <span class="text-gradient" aria-hidden="true">Pillsen</span>
+                <span class="text-primary" aria-hidden="true">Pillsen</span>
             </h1>
             <div class="hero-bottom">
                 <div class="hero-intro rise rise-3">
@@ -724,7 +652,7 @@
 
         <!-- KDY / KDE / SPONZOR -->
         <section id="misto" class="section container">
-            <p class="eyebrow">Blok 01 — Kdy a kde</p>
+            <p class="eyebrow">Kdy a kde</p>
             <dl class="info">
                 <div>
                     <dt class="mono">Kdy</dt>
@@ -751,56 +679,11 @@
             </dl>
         </section>
 
-        <!--        &lt;!&ndash; PILÍŘE &ndash;&gt;-->
-<!--        <section class="pillars-wrap" aria-label="Témata konference">-->
-<!--            <div class="pillars">-->
-<!--                <div class="pillar">-->
-<!--                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/></svg>-->
-<!--                    <h3 class="display">Zdravé peníze</h3>-->
-<!--                    <p>Historie peněz a ekonomie &ndash; od českých tolarů po timechain.</p>-->
-<!--                </div>-->
-<!--                <div class="pillar">-->
-<!--                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>-->
-<!--                    <h3 class="display">Technologie</h3>-->
-<!--                    <p>Lightning, soukromí, peněženky a těžba &ndash; jak to celé funguje pod kapotou.</p>-->
-<!--                </div>-->
-<!--                <div class="pillar">-->
-<!--                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>-->
-<!--                    <h3 class="display">Suverenita</h3>-->
-<!--                    <p>Self-custody, vlastní node a svoboda platit bez dovolení.</p>-->
-<!--                </div>-->
-<!--                <div class="pillar">-->
-<!--                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 11h1a3 3 0 0 1 0 6h-1M9 12v6M13 12v6M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5S9.44 2 11 2s2 1.5 3 1.5 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5zM5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8"/></svg>-->
-<!--                    <h3 class="display">Komunita</h3>-->
-<!--                    <p>Rodiště plzeňského ležáku. Po přednáškách se debatuje u piva.</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </section>-->
-
-        <!-- NOVINKY (nejnovější nahoru) -->
-<!--        <section id="novinky" class="section container">-->
-<!--            <p class="eyebrow">Blok 02 — Novinky</p>-->
-<!--            <h2 class="display">Co je nového</h2>-->
-
-<!--            <div class="news">-->
-<!--                <article>-->
-<!--                    <time class="mono" datetime="2026-11-17">17. listopadu 2026</time>-->
-<!--                    <div>-->
-<!--                        <h3 class="display">Připravujeme Orange Pillsen 2027</h3>-->
-<!--                        <p>Po úspěšném ročníku 2026 chystáme další setkání &ndash; v sobotu 6. února 2027.-->
-<!--                            Program budeme postupně zveřejňovat zde na webu. Mezitím si můžete pustit-->
-<!--                            záznamy loňských přednášek na našem-->
-<!--                            <a href="https://www.youtube.com/@OrangePillsen" target="_blank" rel="noopener">YouTube kanálu</a>.</p>-->
-<!--                    </div>-->
-<!--                </article>-->
-<!--            </div>-->
-<!--        </section>-->
-
         <!-- PROGRAM -->
-        <section id="program" class="section container" style="padding-top: 0;">
+        <section id="program" class="section section--flush container">
             <div class="section-head">
                 <div>
-                    <p class="eyebrow">Blok 03 — Program</p>
+                    <p class="eyebrow">Program</p>
                     <h2 class="display">Na pódiu</h2>
                 </div>
             </div>
@@ -827,7 +710,7 @@
                     <p class="mono">Programátor a bitcoinový nadšenec</p>
                 </div>
                 <div class="tile">
-                    <div class="tile-visual"><img src="2027/michal_sykora.jpg" alt="Michal Sýkora" loading="lazy" style="object-position: center center;"></div>
+                    <div class="tile-visual tile-visual--centered"><img src="2027/michal_sykora.jpg" alt="Michal Sýkora" loading="lazy"></div>
                     <h3 class="display">Michal Sýkora</h3>
                     <p class="mono">Lídr plzeňské jednadvacítky</p>
                 </div>
@@ -838,7 +721,7 @@
         <section id="sponzor" class="sponsor-wrap">
             <div class="container sponsor-grid">
                 <div>
-                    <p class="eyebrow">Blok 04 — Sponzor</p>
+                    <p class="eyebrow">Sponzor</p>
                     <h2 class="display">Děkujeme <span class="text-primary">partnerovi</span></h2>
                 </div>
                 <a href="https://www.galosoft.cz/cs/crypto" target="_blank" rel="noopener" class="sponsor">
@@ -856,7 +739,7 @@
         <section id="archiv" class="section container">
             <div class="section-head">
                 <div>
-                    <p class="eyebrow">Blok 05 — Archiv</p>
+                    <p class="eyebrow">Archiv</p>
                     <h2 class="display">Předchozí ročníky</h2>
                 </div>
                 <a href="https://www.youtube.com/@OrangePillsen" target="_blank" rel="noopener" class="btn btn--frame">YouTube @OrangePillsen
@@ -878,7 +761,7 @@
                     <p>Fotky a slidy z přednášek.</p>
                 </a>
                 <a href="2025/OrangePilsen2025.html" class="tile">
-                    <div class="tile-visual tile-visual--banner" style="background: #030201;"><img src="2027/archiv_2025.jpg" alt="Orange Pillsen 2025" loading="lazy" style="width: 70%; height: 70%;"></div>
+                    <div class="tile-visual tile-visual--banner tile-visual--archive-2025"><img src="2027/archiv_2025.jpg" alt="Orange Pillsen 2025" loading="lazy"></div>
                     <h3 class="display">Orange Pillsen 2025</h3>
                     <p class="mono">Web ročníku</p>
                     <p>Ohlédnutí za ročníkem 2025.</p>
